@@ -1,0 +1,89 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+
+/* @var $this yii\web\View */
+/* @var $model app\models\ObjetosDeAprendizagem */
+/* @var $form yii\widgets\ActiveForm */
+?>
+<!--
+<style type="text/css"> 
+#adicionais {visibility:hidden} 
+</style> -->
+
+<script type="text/javascript"> 
+    function toggle(chkbox, div_adicionais) { 
+        var visSetting = (chkbox.checked) ? "visible" : "hidden"; 
+        document.getElementById(div_adicionais).style.visibility = visSetting; 
+    } 
+
+    function OnChangeCheckbox (checkbox) {
+         if (checkbox.checked) {
+            $("#adicionais").prop("style", "display: block");
+                //alert ("The check box is checked.");
+        }
+        else {
+            $("#adicionais").prop("style", "display: none");
+                //alert ("The check box is not checked.");
+        }
+    }
+
+</script> 
+
+<div class="objetos-de-aprendizagem-form">
+
+    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
+
+    <?= $form->field($model, 'titulo_objeto')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'estilo_objeto')->dropDownList([$arrayDeEstilo],['prompt'=>'Selecione o primeiro estilo'],['style'=>'width:530px']) ?>
+
+    <?= $form->field($model, 'estilo_objeto')->dropDownList([$arrayDeEstilo],['prompt'=>'Selecione o segundo estilo'],['style'=>'width:530px']) ?>
+
+    <?= $form->field($model, 'estilo_objeto')->dropDownList([$arrayDeEstilo],['prompt'=>'Selecione o terceiro estilo'],['style'=>'width:530px']) ?>
+
+    <?= $form->field($model, 'descricao_objeto')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tipointeratividade_objeto')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'dificuldade_objeto')->textInput(['style'=>'width:700px']) ?>
+
+    <table style="border: 1px solid black">
+        <tr>
+            <b>Informe a URL que contém o objeto:</b> <br>
+            <?= $form->field($model, 'localizacao_objeto')->textInput(['maxlength' => true])->label(false) ?>
+        </tr>
+        <tr>
+            <b>Ou...</b><br><br>
+        </tr>
+        <tr>
+            <b>Faça upload do objeto:</b><br>
+            <?= $form->field($model, 'file')->fileInput()->label(false) ?>
+        </tr>
+    </table>
+
+    <br>
+    
+
+    <input type="checkbox" id="checkForMoreInfo" onclick="OnChangeCheckbox(this)" >
+    <!-- <input type="checkbox" id="checkForMoreInfo" onclick="toggle(this, 'adicionais')" >  -->
+    <label for="checkForMoreInfo">Adicionar mais informações</label>
+
+    <div id="adicionais" style="display: none">
+        <?= $form->field($model, 'idioma_objeto')->textInput(['style'=>'width:500px']) ?>
+        <?= $form->field($model, 'palavraschaves_objeto')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'requisitos_objeto')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'estrutura_objeto')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'recurso_objeto')->textInput(['maxlength' => true]) ?>
+    </div>
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Cadastrar Objeto' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <a href="?r=objetos-de-aprendizagem/index" class="btn btn-default">Voltar</a>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>
