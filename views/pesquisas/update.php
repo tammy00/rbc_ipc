@@ -37,7 +37,9 @@ $this->title = 'Atualizar dúvida';
         ],
     ]) ?>
 
-    <b>Objeto de Aprendizagem apresentado: </b>
+    <b>Similaridade: </b> <?php echo $model->similaridade; ?>
+
+    <br><br><b>Objeto de Aprendizagem apresentado: </b>
 
     <?php if ( $obj->localizacao_objeto != null ) {  ?>
        <?= DetailView::widget([

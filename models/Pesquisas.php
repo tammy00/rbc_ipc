@@ -43,6 +43,7 @@ class Pesquisas extends \yii\db\ActiveRecord
             [['aluno_id', 'solucao_id', 'data_criacao'], 'required'],
             [['aluno_id', 'solucao_id'], 'integer'],
             [['data_criacao'], 'safe'],
+            [['similaridade'], 'number'],
             [['estilo'], 'string', 'max' => 45],
             [['topico'], 'string', 'max' => 150],
             [['tema'], 'string', 'max' => 100],
@@ -81,7 +82,8 @@ class Pesquisas extends \yii\db\ActiveRecord
             'acao' => 'Ação Pedagógica (recomendar um objeto de aprendizagem, leitura de um livro, assistir um vídeo e etc)',
             'objeto' => 'Objeto de Aprendizagem',
             'diagnostico' => 'Diagnóstico', 
-            'listadiagnosticos'=>'Diagnóstico'
+            'listadiagnosticos'=>'Diagnóstico',
+            'similaridade' => 'Similaridade'
         ];
     }
 

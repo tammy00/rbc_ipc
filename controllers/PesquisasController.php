@@ -205,6 +205,7 @@ class PesquisasController extends Controller
             $model->duvida = $des;  // descrição salva
             $model->feedback = "";
             $model->acao = "";
+            $model->similaridade = $similaridade;
 
             $turma = Disciplina::findOne(Yii::$app->user->identity->disciplina_id);
             $model->turma = $turma->turma;
@@ -301,14 +302,11 @@ class PesquisasController extends Controller
 
 
                     $tutor_professor = Usuario::find()->where(['id_usuario' => Yii::$app->user->identity->id_usuario])->one();
-                
-
-                    //->where(['aluno_id' => (Yii::$app->user->identity->id_usuario)])->orderBy(['id_log' => SORT_DESC])->one();
 
                      $pesquisa = Pesquisas::find()->where(['aluno_id' => $aluno->id_usuario])->orderBy(['id_log' => SORT_DESC])->one();
 
                      
-                     $pesquisalog = 'http://mobmoodle.icomp.ufam.edu.br/pbn/rbc_ipc/web/index.php?r=pesquisas/view&id='.$pesquisa->id_log;
+                     $pesquisalog = 'http://localhost:9090/rbc_ipc/web/index.php?r=pesquisas/view&id='.$pesquisa->id_log;
                     
                     set_time_limit(0);
                     
@@ -337,7 +335,6 @@ class PesquisasController extends Controller
                 {
                     
                     $arrayDiagnosticos = SolucaoProblema::find()->select('diagnostico')->distinct()->asArray()->column();
-                    //ArrayHelper::map(SolucaoProblemaSearch::find()->select('diagnostico')->distinct()->asArray()->all(), 'id_solucaoProblema', 'diagnostico');
 
                     $arrayDeObjeto = ArrayHelper::map(ObjetosDeAprendizagemSearch::find()->where(['estilo_objeto'=>$aluno->estilo])-> all(), 'id_objeto', 'titulo_objeto');
 
