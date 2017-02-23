@@ -145,23 +145,26 @@ class ObjetosDeAprendizagemController extends Controller
 
             if ($model->load(Yii::$app->request->post()) )
             {
+
+                $style1 = Estilo::find()->where(['id_estilo' => $model->estilo_objeto])->one();
+                if ($style1 != null ) $model->estilo_objeto = $style1->nome_estilo;
+                else $model->estilo_objeto = "";
+
+                $style2 = Estilo::find()->where(['id_estilo' => $model->estilo_objeto2])->one();
+                if ($style2 != null ) $model->estilo_objeto2 = $style2->nome_estilo;
+                else $model->estilo_objeto = "";
+
+                $style3 = Estilo::find()->where(['id_estilo' => $model->estilo_objeto3])->one();
+                if ($style3 != null ) $model->estilo_objeto3 = $style3->nome_estilo;
+                else $model->estilo_objeto = "";
+
                 if ( $model->localizacao_objeto == null )
                 {
                     $n = 0; 
                     $num = ObjetosDeAprendizagem::find()->orderBy(['id_objeto' => SORT_DESC])->one();
                     // O comando acima pega o id registrado mais recente (o maior id)
 
-		    $style1 = Estilo::find()->where(['id_estilo' => $model->estilo_objeto])->one();
-                    if ($style1 != null ) $model->estilo_objeto = $style1->nome_estilo;
-                    else $model->estilo_objeto = "";
 
-		    $style2 = Estilo::find()->where(['id_estilo' => $model->estilo_objeto2])->one();
-                    if ($style2 != null ) $model->estilo_objeto2 = $style2->nome_estilo;
-                    else $model->estilo_objeto = "";
-
-		    $style3 = Estilo::find()->where(['id_estilo' => $model->estilo_objeto3])->one();
-                    if ($style3 != null ) $model->estilo_objeto3 = $style3->nome_estilo;
-                    else $model->estilo_objeto = "";
 
                     if ( $num->id_objeto == null ) $n = 0; // No caso do banco de dados estar vazio
                     else $n = $num->id_objeto + 1;   
@@ -192,6 +195,7 @@ class ObjetosDeAprendizagemController extends Controller
             else 
             {
                 $arrayDeEstilo = ArrayHelper::map(EstiloSearch::find()->all(), 'id_estilo', 'nome_estilo');
+
                 return $this->render('create', [
                     'model' => $model,
                     'arrayDeEstilo' => $arrayDeEstilo,

@@ -28,7 +28,7 @@ class Estilo extends \yii\db\ActiveRecord
         return [
             [['nome_estilo'], 'required'],
             [['id_estilo'], 'integer'],
-            [['nome_estilo'], 'string', 'max' => 100],
+            [['nome_estilo'], 'string', 'max' => 50],
         ];
     }
 

@@ -333,7 +333,7 @@ class SolucaoProblemaController extends Controller
         $pesquisa->aluno_id = Yii::$app->user->identity->id_usuario;
         $pesquisa->status = 'Submetido';
         $pesquisa->save();
-        $pesquisalog = 'http://mobmoodle.icomp.ufam.edu.br/pbn/rbc_ipc/web/index.php?r=pesquisas/view&id='.$pesquisa->id_log;
+        $pesquisalog = 'http://localhost:9090/rbc_ipc/web/index.php?r=pesquisas/view&id='.$pesquisa->id_log;
 
 
         if ( $professor != null) // Se houver algum professor que lecione para a disciplina que o aluno logado está matriculado
